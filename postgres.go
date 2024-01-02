@@ -22,8 +22,8 @@ func Postgres(localUri ...string) (*sql.DB, error) {
 		}
 		if res != nil && res.CreatePostgresNeonResource.Id != "" {
 			//success
-			// weird I know but it's the only way to do this and prevent the serviec from spinning up
-			os.Exit(42)
+			// weird I know but it's the only way to do this and prevent the service from spinning up
+			os.Exit(0)
 		}
 		return nil, fmt.Errorf("failed to create postgres resource")
 	}
