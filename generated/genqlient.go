@@ -4,17 +4,173 @@ package generated
 
 import (
 	"context"
+	"encoding/json"
 
 	"github.com/Khan/genqlient/graphql"
 )
 
 // CreatePostgresNeonResourceCreatePostgresNeonResource includes the requested fields of the GraphQL type PostgresNeonResource.
 type CreatePostgresNeonResourceCreatePostgresNeonResource struct {
-	Id string `json:"id"`
+	Id          string                                                          `json:"id"`
+	Service     CreatePostgresNeonResourceCreatePostgresNeonResourceService     `json:"service"`
+	Environment CreatePostgresNeonResourceCreatePostgresNeonResourceEnvironment `json:"environment"`
 }
 
 // GetId returns CreatePostgresNeonResourceCreatePostgresNeonResource.Id, and is useful for accessing the field via an interface.
 func (v *CreatePostgresNeonResourceCreatePostgresNeonResource) GetId() string { return v.Id }
+
+// GetService returns CreatePostgresNeonResourceCreatePostgresNeonResource.Service, and is useful for accessing the field via an interface.
+func (v *CreatePostgresNeonResourceCreatePostgresNeonResource) GetService() CreatePostgresNeonResourceCreatePostgresNeonResourceService {
+	return v.Service
+}
+
+// GetEnvironment returns CreatePostgresNeonResourceCreatePostgresNeonResource.Environment, and is useful for accessing the field via an interface.
+func (v *CreatePostgresNeonResourceCreatePostgresNeonResource) GetEnvironment() CreatePostgresNeonResourceCreatePostgresNeonResourceEnvironment {
+	return v.Environment
+}
+
+// CreatePostgresNeonResourceCreatePostgresNeonResourceEnvironment includes the requested fields of the GraphQL type Environment.
+type CreatePostgresNeonResourceCreatePostgresNeonResourceEnvironment struct {
+	EnvironmentFields `json:"-"`
+}
+
+// GetId returns CreatePostgresNeonResourceCreatePostgresNeonResourceEnvironment.Id, and is useful for accessing the field via an interface.
+func (v *CreatePostgresNeonResourceCreatePostgresNeonResourceEnvironment) GetId() string {
+	return v.EnvironmentFields.Id
+}
+
+// GetName returns CreatePostgresNeonResourceCreatePostgresNeonResourceEnvironment.Name, and is useful for accessing the field via an interface.
+func (v *CreatePostgresNeonResourceCreatePostgresNeonResourceEnvironment) GetName() string {
+	return v.EnvironmentFields.Name
+}
+
+func (v *CreatePostgresNeonResourceCreatePostgresNeonResourceEnvironment) UnmarshalJSON(b []byte) error {
+
+	if string(b) == "null" {
+		return nil
+	}
+
+	var firstPass struct {
+		*CreatePostgresNeonResourceCreatePostgresNeonResourceEnvironment
+		graphql.NoUnmarshalJSON
+	}
+	firstPass.CreatePostgresNeonResourceCreatePostgresNeonResourceEnvironment = v
+
+	err := json.Unmarshal(b, &firstPass)
+	if err != nil {
+		return err
+	}
+
+	err = json.Unmarshal(
+		b, &v.EnvironmentFields)
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
+type __premarshalCreatePostgresNeonResourceCreatePostgresNeonResourceEnvironment struct {
+	Id string `json:"id"`
+
+	Name string `json:"name"`
+}
+
+func (v *CreatePostgresNeonResourceCreatePostgresNeonResourceEnvironment) MarshalJSON() ([]byte, error) {
+	premarshaled, err := v.__premarshalJSON()
+	if err != nil {
+		return nil, err
+	}
+	return json.Marshal(premarshaled)
+}
+
+func (v *CreatePostgresNeonResourceCreatePostgresNeonResourceEnvironment) __premarshalJSON() (*__premarshalCreatePostgresNeonResourceCreatePostgresNeonResourceEnvironment, error) {
+	var retval __premarshalCreatePostgresNeonResourceCreatePostgresNeonResourceEnvironment
+
+	retval.Id = v.EnvironmentFields.Id
+	retval.Name = v.EnvironmentFields.Name
+	return &retval, nil
+}
+
+// CreatePostgresNeonResourceCreatePostgresNeonResourceService includes the requested fields of the GraphQL type Service.
+type CreatePostgresNeonResourceCreatePostgresNeonResourceService struct {
+	ServiceFields `json:"-"`
+}
+
+// GetId returns CreatePostgresNeonResourceCreatePostgresNeonResourceService.Id, and is useful for accessing the field via an interface.
+func (v *CreatePostgresNeonResourceCreatePostgresNeonResourceService) GetId() string {
+	return v.ServiceFields.Id
+}
+
+// GetName returns CreatePostgresNeonResourceCreatePostgresNeonResourceService.Name, and is useful for accessing the field via an interface.
+func (v *CreatePostgresNeonResourceCreatePostgresNeonResourceService) GetName() string {
+	return v.ServiceFields.Name
+}
+
+// GetResourceName returns CreatePostgresNeonResourceCreatePostgresNeonResourceService.ResourceName, and is useful for accessing the field via an interface.
+func (v *CreatePostgresNeonResourceCreatePostgresNeonResourceService) GetResourceName() string {
+	return v.ServiceFields.ResourceName
+}
+
+func (v *CreatePostgresNeonResourceCreatePostgresNeonResourceService) UnmarshalJSON(b []byte) error {
+
+	if string(b) == "null" {
+		return nil
+	}
+
+	var firstPass struct {
+		*CreatePostgresNeonResourceCreatePostgresNeonResourceService
+		graphql.NoUnmarshalJSON
+	}
+	firstPass.CreatePostgresNeonResourceCreatePostgresNeonResourceService = v
+
+	err := json.Unmarshal(b, &firstPass)
+	if err != nil {
+		return err
+	}
+
+	err = json.Unmarshal(
+		b, &v.ServiceFields)
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
+type __premarshalCreatePostgresNeonResourceCreatePostgresNeonResourceService struct {
+	Id string `json:"id"`
+
+	Name string `json:"name"`
+
+	ResourceName string `json:"resourceName"`
+}
+
+func (v *CreatePostgresNeonResourceCreatePostgresNeonResourceService) MarshalJSON() ([]byte, error) {
+	premarshaled, err := v.__premarshalJSON()
+	if err != nil {
+		return nil, err
+	}
+	return json.Marshal(premarshaled)
+}
+
+func (v *CreatePostgresNeonResourceCreatePostgresNeonResourceService) __premarshalJSON() (*__premarshalCreatePostgresNeonResourceCreatePostgresNeonResourceService, error) {
+	var retval __premarshalCreatePostgresNeonResourceCreatePostgresNeonResourceService
+
+	retval.Id = v.ServiceFields.Id
+	retval.Name = v.ServiceFields.Name
+	retval.ResourceName = v.ServiceFields.ResourceName
+	return &retval, nil
+}
+
+type CreatePostgresNeonResourceInput struct {
+	ServiceId     string `json:"serviceId"`
+	EnvironmentId string `json:"environmentId"`
+}
+
+// GetServiceId returns CreatePostgresNeonResourceInput.ServiceId, and is useful for accessing the field via an interface.
+func (v *CreatePostgresNeonResourceInput) GetServiceId() string { return v.ServiceId }
+
+// GetEnvironmentId returns CreatePostgresNeonResourceInput.EnvironmentId, and is useful for accessing the field via an interface.
+func (v *CreatePostgresNeonResourceInput) GetEnvironmentId() string { return v.EnvironmentId }
 
 // CreatePostgresNeonResourceResponse is returned by CreatePostgresNeonResource on success.
 type CreatePostgresNeonResourceResponse struct {
@@ -26,33 +182,78 @@ func (v *CreatePostgresNeonResourceResponse) GetCreatePostgresNeonResource() Cre
 	return v.CreatePostgresNeonResource
 }
 
-// __CreatePostgresNeonResourceInput is used internally by genqlient
-type __CreatePostgresNeonResourceInput struct {
-	DeploymentId string `json:"deploymentId"`
+// EnvironmentFields includes the GraphQL fields of Environment requested by the fragment EnvironmentFields.
+type EnvironmentFields struct {
+	Id   string `json:"id"`
+	Name string `json:"name"`
 }
 
-// GetDeploymentId returns __CreatePostgresNeonResourceInput.DeploymentId, and is useful for accessing the field via an interface.
-func (v *__CreatePostgresNeonResourceInput) GetDeploymentId() string { return v.DeploymentId }
+// GetId returns EnvironmentFields.Id, and is useful for accessing the field via an interface.
+func (v *EnvironmentFields) GetId() string { return v.Id }
+
+// GetName returns EnvironmentFields.Name, and is useful for accessing the field via an interface.
+func (v *EnvironmentFields) GetName() string { return v.Name }
+
+// ServiceFields includes the GraphQL fields of Service requested by the fragment ServiceFields.
+type ServiceFields struct {
+	Id           string `json:"id"`
+	Name         string `json:"name"`
+	ResourceName string `json:"resourceName"`
+}
+
+// GetId returns ServiceFields.Id, and is useful for accessing the field via an interface.
+func (v *ServiceFields) GetId() string { return v.Id }
+
+// GetName returns ServiceFields.Name, and is useful for accessing the field via an interface.
+func (v *ServiceFields) GetName() string { return v.Name }
+
+// GetResourceName returns ServiceFields.ResourceName, and is useful for accessing the field via an interface.
+func (v *ServiceFields) GetResourceName() string { return v.ResourceName }
+
+// __CreatePostgresNeonResourceInput is used internally by genqlient
+type __CreatePostgresNeonResourceInput struct {
+	Input CreatePostgresNeonResourceInput `json:"input"`
+}
+
+// GetInput returns __CreatePostgresNeonResourceInput.Input, and is useful for accessing the field via an interface.
+func (v *__CreatePostgresNeonResourceInput) GetInput() CreatePostgresNeonResourceInput {
+	return v.Input
+}
 
 // The query or mutation executed by CreatePostgresNeonResource.
 const CreatePostgresNeonResource_Operation = `
-mutation CreatePostgresNeonResource ($deploymentId: ID!) {
-	createPostgresNeonResource(input: {deploymentId:$deploymentId}) {
+mutation CreatePostgresNeonResource ($input: CreatePostgresNeonResourceInput!) {
+	createPostgresNeonResource(input: $input) {
 		id
+		service {
+			... ServiceFields
+		}
+		environment {
+			... EnvironmentFields
+		}
 	}
+}
+fragment ServiceFields on Service {
+	id
+	name
+	resourceName
+}
+fragment EnvironmentFields on Environment {
+	id
+	name
 }
 `
 
 func CreatePostgresNeonResource(
 	ctx context.Context,
 	client graphql.Client,
-	deploymentId string,
+	input CreatePostgresNeonResourceInput,
 ) (*CreatePostgresNeonResourceResponse, error) {
 	req := &graphql.Request{
 		OpName: "CreatePostgresNeonResource",
 		Query:  CreatePostgresNeonResource_Operation,
 		Variables: &__CreatePostgresNeonResourceInput{
-			DeploymentId: deploymentId,
+			Input: input,
 		},
 	}
 	var err error
