@@ -35,6 +35,6 @@ func getGenQlient(token ...string) graphql.Client {
 	httpClient := http.Client{
 		Transport: transport,
 	}
-	graphqlClient := graphql.NewClient("https://dev-api.tasai.dev/graphql", &httpClient)
+	graphqlClient := graphql.NewClient("http://localhost:8080/graphql", &httpClient)
 	return graphqlClient
 }
