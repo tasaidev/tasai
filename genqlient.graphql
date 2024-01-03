@@ -1,5 +1,5 @@
-mutation CreatePostgresNeonResource($serviceId: ID!, $environmentId: ID!) {
-  createPostgresNeonResource(input: { serviceId: $serviceId, environmentId: $environmentId}) {
+mutation CreatePostgresNeonResource($deploymentId: ID!) {
+  createPostgresNeonResource(input: { deploymentId: $deploymentId }) {
     id
   }
 }

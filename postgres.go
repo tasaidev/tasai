@@ -11,12 +11,11 @@ import (
 )
 
 func Postgres(localUri ...string) (*sql.DB, error) {
-	serviceId := os.Getenv("TASAI_SERVICE_ID")
-	environmentId := os.Getenv("TASAI_ENVIRONMENT_ID")
+	deploymentId := os.Getenv("TASAI_DEPLOYMENT_ID")
 	token := os.Getenv("TASAI_TOKEN")
-	if serviceId != "" && environmentId != "" && token != "" {
+	if deploymentId != "" && token != "" {
 		client := login(token)
-		res, err := generated.CreatePostgresNeonResource(context.TODO(), client, serviceId, environmentId)
+		res, err := generated.CreatePostgresNeonResource(context.TODO(), client, deploymentId)
 		if err != nil {
 			return nil, err
 		}

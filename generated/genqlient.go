@@ -28,20 +28,16 @@ func (v *CreatePostgresNeonResourceResponse) GetCreatePostgresNeonResource() Cre
 
 // __CreatePostgresNeonResourceInput is used internally by genqlient
 type __CreatePostgresNeonResourceInput struct {
-	ServiceId     string `json:"serviceId"`
-	EnvironmentId string `json:"environmentId"`
+	DeploymentId string `json:"deploymentId"`
 }
 
-// GetServiceId returns __CreatePostgresNeonResourceInput.ServiceId, and is useful for accessing the field via an interface.
-func (v *__CreatePostgresNeonResourceInput) GetServiceId() string { return v.ServiceId }
-
-// GetEnvironmentId returns __CreatePostgresNeonResourceInput.EnvironmentId, and is useful for accessing the field via an interface.
-func (v *__CreatePostgresNeonResourceInput) GetEnvironmentId() string { return v.EnvironmentId }
+// GetDeploymentId returns __CreatePostgresNeonResourceInput.DeploymentId, and is useful for accessing the field via an interface.
+func (v *__CreatePostgresNeonResourceInput) GetDeploymentId() string { return v.DeploymentId }
 
 // The query or mutation executed by CreatePostgresNeonResource.
 const CreatePostgresNeonResource_Operation = `
-mutation CreatePostgresNeonResource ($serviceId: ID!, $environmentId: ID!) {
-	createPostgresNeonResource(input: {serviceId:$serviceId,environmentId:$environmentId}) {
+mutation CreatePostgresNeonResource ($deploymentId: ID!) {
+	createPostgresNeonResource(input: {deploymentId:$deploymentId}) {
 		id
 	}
 }
@@ -50,15 +46,13 @@ mutation CreatePostgresNeonResource ($serviceId: ID!, $environmentId: ID!) {
 func CreatePostgresNeonResource(
 	ctx context.Context,
 	client graphql.Client,
-	serviceId string,
-	environmentId string,
+	deploymentId string,
 ) (*CreatePostgresNeonResourceResponse, error) {
 	req := &graphql.Request{
 		OpName: "CreatePostgresNeonResource",
 		Query:  CreatePostgresNeonResource_Operation,
 		Variables: &__CreatePostgresNeonResourceInput{
-			ServiceId:     serviceId,
-			EnvironmentId: environmentId,
+			DeploymentId: deploymentId,
 		},
 	}
 	var err error
