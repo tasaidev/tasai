@@ -1,7 +1,5 @@
 package tasai
 
-//go:generate echo Postgres
-
 import (
 	"context"
 	"database/sql"
