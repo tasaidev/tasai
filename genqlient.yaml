@@ -1,6 +1,0 @@
-schema: ../tasai-core/api/gql/*.graphql
-
-operations:
-- genqlient.graphql
-
-generated: generated/genqlient.go
