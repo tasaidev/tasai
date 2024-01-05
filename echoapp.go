@@ -82,5 +82,5 @@ func (e *EchoApp) Start() error {
 		return e.Echo.Start(e.settings.Localport)
 	}
 	port := os.Getenv("PORT")
-	return e.Echo.Start(port)
+	return e.Echo.Start(fmt.Sprintf(":%s", port))
 }
