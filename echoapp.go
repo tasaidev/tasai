@@ -5,15 +5,15 @@ import (
 	"encoding/json"
 	"fmt"
 	"os"
+	"strings"
 
 	"github.com/labstack/echo/v4"
-	"github.com/tasaidev/tasai/internal"
 )
 
 type EchoApp struct {
 	*echo.Echo
 	settings *appSettings
-	postgres *internal.Postgres
+	postgres *postgres
 	env      string
 }
 
@@ -37,9 +37,9 @@ func NewEchoApp(opts ...appOption) *EchoApp {
 	if env != "dev" && env != "prod" {
 		env = "local"
 	}
-	var postgres *internal.Postgres
+	var postgres *postgres
 	if settings.Postgres {
-		pg, err := internal.NewPostgres(settings.Localuri)
+		pg, err := newPostgres(settings.Localuri)
 		if err != nil {
 			fmt.Println(err)
 			os.Exit(1)
@@ -67,20 +67,23 @@ func (e *EchoApp) IsProd() bool {
 }
 
 func (e *EchoApp) Postgres() (*sql.DB, error) {
-	if e.postgres == nil || e.postgres.DB == nil {
+	if e.postgres == nil || e.postgres.db == nil {
 		return nil, fmt.Errorf("postgres not configured")
 	}
-	return e.postgres.DB, nil
+	return e.postgres.db, nil
 }
 
 func (e *EchoApp) Start() error {
-	if e.postgres != nil && e.postgres.DB != nil {
-		defer e.postgres.DB.Close()
+	if e.postgres != nil && e.postgres.db != nil {
+		defer e.postgres.db.Close()
 	}
 	// it's local
 	if e.IsLocal() {
 		return e.Echo.Start(e.settings.Localport)
 	}
 	port := os.Getenv("PORT")
-	return e.Echo.Start(fmt.Sprintf(":%s", port))
+	if !strings.Contains(port, ":") {
+		port = fmt.Sprintf(":%s", port)
+	}
+	return e.Echo.Start(port)
 }

@@ -1,4 +1,4 @@
-package internal
+package tasai
 
 import (
 	"database/sql"
@@ -8,11 +8,11 @@ import (
 	_ "github.com/jackc/pgx/v5/stdlib"
 )
 
-type Postgres struct {
-	DB *sql.DB
+type postgres struct {
+	db *sql.DB
 }
 
-func NewPostgres(localUri string) (*Postgres, error) {
+func newPostgres(localUri string) (*postgres, error) {
 	isdeployment := os.Getenv("TASAI_DEPLOYMENT")
 	if isdeployment != "" {
 		return nil, nil
@@ -24,8 +24,8 @@ func NewPostgres(localUri string) (*Postgres, error) {
 		if err != nil {
 			return nil, err
 		}
-		return &Postgres{
-			DB: db,
+		return &postgres{
+			db,
 		}, nil
 	}
 	// it's deployed use the connection string
@@ -37,7 +37,7 @@ func NewPostgres(localUri string) (*Postgres, error) {
 	if err != nil {
 		return nil, err
 	}
-	return &Postgres{
-		DB: db,
+	return &postgres{
+		db,
 	}, nil
 }
